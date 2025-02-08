@@ -13,6 +13,7 @@ import SettingsScreen from "./screens/settings/SettingsScreen";
 import "./global.css";
 import MesasScreen from "./screens/MesasSceen";
 import AddMesaScreen from "./screens/settings/AddMesaScreen";
+import CrearZona from "./screens/settings/CrearZona";
 
 export default function App() {
   const { colorScheme } = useColorScheme();
@@ -68,18 +69,13 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Profile"
-          component={ProfileScreen}
+          name="CrearZona"
+          component={CrearZona}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="AddMesa"
+          name="CrearMesaEnZona"
           component={AddMesaScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Pedidos"
-          component={PedidosScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

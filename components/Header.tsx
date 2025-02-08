@@ -10,7 +10,7 @@ const Header = () => {
     toggleColorScheme();
   };
   return (
-    <View className="p-4">
+    <View className="">
       <CustomButton
         color={"bg-red-500"}
         ancho="w-[50%]"

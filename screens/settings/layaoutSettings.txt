@@ -1,0 +1,22 @@
+import React from "react";
+import { View, Platform, ScrollView } from "react-native";
+import Header from "../../components/Header";
+import CustomButton from "../../components/CustomButton";
+import { MiVentana } from "../../components/MiVentana";
+import { useNavigation } from "@react-navigation/native";
+import { Box } from "../../components/Utils";
+const CrearPizarra = () => {
+  const navigation = useNavigation();
+  return (
+    <MiVentana>
+      <View className="justify-center items-center bg-background dark:bg-dark-background">
+        {/* <Header /> */}
+        <View className="mt-10 w-full items-center">
+          <Box className="mt-10"></Box>
+        </View>
+      </View>
+    </MiVentana>
+  );
+};
+
+export default CrearPizarra;

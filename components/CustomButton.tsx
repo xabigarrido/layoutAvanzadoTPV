@@ -10,7 +10,7 @@ const CustomButton = ({
 }) => {
   return (
     <TouchableOpacity
-      className={`${color} ${ancho} p-4 rounded-md `}
+      className={`${color} ${ancho} p-4 rounded-md h-[50px]`}
       onPress={onPress}
     >
       <Text className={`text-center font-bold ${textColor}`}>{texto}</Text>
