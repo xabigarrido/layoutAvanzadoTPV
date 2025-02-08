@@ -225,9 +225,9 @@
 //   );
 // };
 
-// export default LoginScreen;
+// export default LoginScreen;,
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   Text,
   TextBase,
@@ -239,7 +239,9 @@ import { MiVentana } from "../components/MiVentana";
 import {
   Box,
   ErroresInput,
+  gestionarErroresLogin,
   MiInput,
+  PantallaLoadingPage,
   SeparadorH,
   TextBig,
   TextSmall,
@@ -249,13 +251,27 @@ import { Formik } from "formik";
 import CustomButton from "../components/CustomButton";
 import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
+import { loginUser } from "../Api/LoginApi";
+import Toast from "react-native-toast-message";
 
-const LoginScreen = ({ setOnline }) => {
+const LoginScreen = () => {
   const navigation = useNavigation();
   const passwordRef = useRef();
-  const hanlderSubmit = (values, actions) => {
-    setOnline(true);
-    console.log(values);
+  const [loadingPage, setLoadingPage] = useState(false);
+  const [erroresLogin, setErroresLogin] = useState(null);
+  const hanlderSubmit = async (values, actions) => {
+    try {
+      setLoadingPage(true);
+      await loginUser(values);
+    } catch (error) {
+      console.log(error.data);
+      Toast.show({
+        type: "error",
+        text1: "Ha habido un problema",
+        text2: gestionarErroresLogin(error.data),
+      });
+    }
+    setLoadingPage(false);
   };
   const validateSchema = Yup.object().shape({
     email: Yup.string()
@@ -263,6 +279,9 @@ const LoginScreen = ({ setOnline }) => {
       .required("Campo requerido"),
     password: Yup.string().min(6, "Minimo 6").required("Campo requerido"),
   });
+  if (loadingPage) {
+    return <PantallaLoadingPage />;
+  }
   return (
     <MiVentana>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">

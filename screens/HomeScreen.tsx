@@ -17,7 +17,6 @@ const HomeScreen = () => {
     <MiVentana>
       <View className="justify-center items-center bg-background dark:bg-dark-background">
         <DarkModeSwitch />
-
         <Box>
           <View className="flex-row justify-between items-center">
             <View>

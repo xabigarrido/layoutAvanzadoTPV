@@ -42,7 +42,14 @@ const SettingsScreen = ({ route }) => {
       icono: "contact-page",
       id: 5,
     },
+
     { name: "Gestion Caja", page: "PizarraPanel", icono: "calculate", id: 6 },
+    {
+      name: "Cerrar Sesion",
+      page: "CerrarSesion",
+      icono: "logout",
+      id: 7,
+    },
   ];
   const renderItem = ({ item }) => {
     return (

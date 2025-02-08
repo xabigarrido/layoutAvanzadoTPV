@@ -16,12 +16,17 @@ import AddMesaScreen from "./screens/settings/AddMesaScreen";
 import CrearZona from "./screens/settings/CrearZona";
 import LoginScreen from "./screens/LoginScreen";
 import RegistroScreen from "./screens/RegristroScreen";
+import { AuthProvider, useAuth } from "./Context/AuthContext";
+import { PantallaLoading } from "./components/Utils";
+import CerrarSesion from "./screens/settings/CerrarSesion";
+import Toast from "react-native-toast-message";
 
 export default function App() {
   const { colorScheme } = useColorScheme();
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
   const [online, setOnline] = useState(false);
+
   const TabNavigator = () => {
     return (
       <Tab.Navigator
@@ -56,9 +61,10 @@ export default function App() {
           headerShown: false,
         })}
       >
-        <Tab.Screen name="MesasScreen" component={MesasScreen} />
-
         <Tab.Screen name="Inicio" component={HomeScreen} />
+
+        <Tab.Screen name="MesasScreen" component={AddMesaScreen} />
+
         <Tab.Screen name="Settings" component={ConfigStack} />
       </Tab.Navigator>
     );
@@ -81,6 +87,11 @@ export default function App() {
           component={AddMesaScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="CerrarSesion"
+          component={CerrarSesion}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     );
   };
@@ -90,7 +101,7 @@ export default function App() {
         <Stack.Screen
           name="LoginScreen"
           options={{ headerShown: false }}
-          children={() => <LoginScreen setOnline={setOnline} />}
+          children={() => <LoginScreen />}
         />
         <Stack.Screen
           name="RegistroScreen"
@@ -100,15 +111,23 @@ export default function App() {
       </Stack.Navigator>
     );
   };
+  const AuthContext = () => {
+    const { userOnline } = useAuth();
+
+    return (
+      <MiVentana>
+        <NavigationContainer>
+          {userOnline ? <TabNavigator /> : <AuthStack />}
+        </NavigationContainer>
+      </MiVentana>
+    );
+  };
   return (
-    <MiVentana>
-      <NavigationContainer>
-        {online == false ? (
-          <AuthStack setOnline={setOnline} />
-        ) : (
-          <TabNavigator />
-        )}
-      </NavigationContainer>
-    </MiVentana>
+    <AuthProvider>
+      <PantallaLoading>
+        <AuthContext />
+        <Toast />
+      </PantallaLoading>
+    </AuthProvider>
   );
 }
