@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, SafeAreaView, Platform, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -14,11 +14,14 @@ import "./global.css";
 import MesasScreen from "./screens/MesasSceen";
 import AddMesaScreen from "./screens/settings/AddMesaScreen";
 import CrearZona from "./screens/settings/CrearZona";
+import LoginScreen from "./screens/LoginScreen";
+import RegistroScreen from "./screens/RegristroScreen";
 
 export default function App() {
   const { colorScheme } = useColorScheme();
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
+  const [online, setOnline] = useState(false);
   const TabNavigator = () => {
     return (
       <Tab.Navigator
@@ -81,10 +84,30 @@ export default function App() {
       </Stack.Navigator>
     );
   };
+  const AuthStack = ({ setOnline }) => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="LoginScreen"
+          options={{ headerShown: false }}
+          children={() => <LoginScreen setOnline={setOnline} />}
+        />
+        <Stack.Screen
+          name="RegistroScreen"
+          component={RegistroScreen}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    );
+  };
   return (
     <MiVentana>
       <NavigationContainer>
-        <TabNavigator />
+        {online == false ? (
+          <AuthStack setOnline={setOnline} />
+        ) : (
+          <TabNavigator />
+        )}
       </NavigationContainer>
     </MiVentana>
   );

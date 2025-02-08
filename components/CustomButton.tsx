@@ -13,7 +13,9 @@ const CustomButton = ({
       className={`${color} ${ancho} p-4 rounded-md h-[50px]`}
       onPress={onPress}
     >
-      <Text className={`text-center font-bold ${textColor}`}>{texto}</Text>
+      <Text className={`font-sans text-xl text-center font-bold ${textColor}`}>
+        {texto}
+      </Text>
     </TouchableOpacity>
   );
 };

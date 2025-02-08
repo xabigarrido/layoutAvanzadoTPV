@@ -16,7 +16,8 @@ const HomeScreen = () => {
   return (
     <MiVentana>
       <View className="justify-center items-center bg-background dark:bg-dark-background">
-        <Header />
+        <DarkModeSwitch />
+
         <Box>
           <View className="flex-row justify-between items-center">
             <View>
@@ -33,10 +34,6 @@ const HomeScreen = () => {
               <Image
                 source={Luffy}
                 style={{ width: 70, height: 70, borderRadius: 20 }}
-              />
-              <DarkModeSwitch
-                isDarkMode={colorScheme === "dark"}
-                toggleColorScheme={toggleColorScheme}
               />
             </View>
           </View>

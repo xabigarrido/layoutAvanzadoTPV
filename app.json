@@ -23,11 +23,32 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.xabiergarrido.PrimerConceptoApp"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
-    }
+    },
+    "build": {
+      "preview": {
+        "distribution": "internal",
+        "android": {
+          "buildType": "apk"
+        }
+      },
+      "production": {
+        "distribution": "store",
+        "android": {
+          "buildType": "apk"
+        }
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7ba25227-95d9-4b63-8d68-462f0c170e05"
+      }
+    },
+    "owner": "xabiergarrido"
   }
 }
